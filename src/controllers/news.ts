@@ -1,26 +1,32 @@
 import { Request, Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { insertNews } from "../services/New";
+import { deleteNew, getNew, getNews, insertNews, updateNew } from "../services/New";
 
-const getItem = (req: Request, res: Response)=>{
+const getItem = async(req: Request, res: Response)=>{
 try {
-    
+  const { id } = req.params
+  const response = await getNew(id);
+  res.send(response)
 } catch (error) {
    handleHttp(res, `ERROR_GET_ITEM: ${error}`)
 }
 };
 
-const getItems = (req: Request, res: Response)=>{
+const getItems = async(req: Request, res: Response)=>{
 try {
-    
+    const response = await getNews();
+    res.send(response);
 } catch (error) {
     handleHttp(res, `ERROR_GET_ITEMS: ${error}` )
 }
 };
 
-const uploadItem = (req: Request, res: Response)=>{
+const uploadItem = async(req: Request, res: Response)=>{
 try {
-    
+    const { id } = req.params;
+    const  data  = req.body;
+    const response = await updateNew(id, data)
+    res.send(response)
 } catch (error) {
     handleHttp(res, `ERROR_UPLOAD_ITEMS: ${error}` )
 }
@@ -36,9 +42,12 @@ const postItem = async(req: Request, res: Response) => {
   };
   
 
-const deleteItem = (req: Request, res: Response)=>{
+const deleteItem = async(req: Request, res: Response)=>{
 try {
-    
+    const { id } = req.params;
+    const response = await deleteNew(id);
+    const data = response ? response : "NOT_FOUND"
+    res.send(response) 
 } catch (error) {
     handleHttp(res, `ERROR_DELETE_ITEM: ${error}`)
 }
