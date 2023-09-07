@@ -31,7 +31,7 @@ const loginUser = async({email, password}: Auth)=>{
         return "PASSWORD INCORRECT";
     };
     
-    return isCorrect;
+    return userLog;
 };
 
 export { registerNewUser, loginUser }
