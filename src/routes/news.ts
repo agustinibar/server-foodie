@@ -1,9 +1,16 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
+import { deleteItem, getItem, getItems, postItem, uploadItem } from "../controllers/news";
 
 const router = Router();
 
-router.get("/", (req: Request, res: Response)=>{
-    res.send('This route must get all news')
-});
+router.get("/", getItems);
 
-export { router }
+router.get('/:id', getItem);
+
+router.post('/', postItem);
+
+router.put('/:id', uploadItem)
+
+router.delete('/:id', deleteItem)
+
+export { router };

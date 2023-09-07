@@ -1,21 +1,16 @@
 import { Router } from "express";
-import { readdirSync } from "fs";
 
-const PATH_ROUTER = `${__dirname}`;
 const router = Router();
 
-const cleanFileName = (filename: string)=>{
-    const file = filename.split('.').shift();
-    return file
-}
-readdirSync(PATH_ROUTER).filter((filename)=>{
-    const cleanName = cleanFileName(filename);
-    if(cleanName !== 'index'){
-        import(`./${cleanName}`).then((moduleRouter)=>{
-            console.log(`Loading the route: /${cleanName}`)
-            router.use(`./${cleanName}`, moduleRouter.router)
-        })
-    }
-})
 
-export { router }
+
+
+import * as moduleNews from './news'; 
+import * as moduleBlog from './blog';
+
+
+router.use('/news', moduleNews.router);
+router.use('/blog', moduleBlog.router);
+
+
+export { router };
