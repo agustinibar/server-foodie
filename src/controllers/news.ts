@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { deleteNew, getNew, getNews, insertNews, updateNew } from "../services/New";
+import { deleteNew, getNew, getNews, insertNews, updateNew } from "../services/new";
 
 const getItem = async(req: Request, res: Response)=>{
 try {
