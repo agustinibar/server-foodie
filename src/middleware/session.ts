@@ -1,7 +1,8 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import { verifiedToken } from "../utils/jwt.handle";
+import { RequestExt } from "../interfaces/req-ext";
 
-const checkJwt = async (req: Request, res:Response, next: NextFunction)=>{
+const checkJwt = async (req: RequestExt, res:Response, next: NextFunction)=>{
     try {
         const jwtUser = req.headers.authorization || ''
         const jwt = jwtUser.split(' ').pop();
